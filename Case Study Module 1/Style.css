@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+body, html  {
+    font-weight: bold;
+    text-align: center;
+    background-image: url("Background Image/BackgroundImg.jpg");
+    height: 100%;
+    font-size: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px;
+}
+
+p {
+    font-weight: bold;
+    text-align: center;
+    color: lightyellow;
+
+}
+h1 {
+    padding-top: 50px;
+    font-weight: bold;
+    text-align: center;
+    color: lightyellow;
+}
+
+button {
+    margin: 5px;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: lemonchiffon;
+    border-radius:15px;
+}

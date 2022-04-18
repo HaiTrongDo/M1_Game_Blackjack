@@ -1,0 +1,6 @@
+//video tutor
+https://www.youtube.com/watch?v=jS4aFq5-91M&t=14103s&ab_channel=freeCodeCamp.org
+
+
+//randomcard
+https://w3collective.com/random-playing-card-javascript/
