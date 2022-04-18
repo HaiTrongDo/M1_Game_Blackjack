@@ -6,7 +6,7 @@
 body, html  {
     font-weight: bold;
     text-align: center;
-    background-image: url("Background Image/BackgroundImg.jpg");
+    background-image: url("../Background Image/BackgroundImg.jpg");
     height: 100%;
     font-size: 30px;
     background-position: center;

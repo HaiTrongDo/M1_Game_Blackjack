@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login portal</title>
+    <script src="data.js"></script>
+</head>
+<body>
+<label><input class="loginPortal" id="username" placeholder="Email"></label><br>
+<label><input type="password" class="loginPortal" id="password" placeholder="Password"></label>
+<button onclick="login()">Login</button>
+<br>
+<label><input type="playerName" class="loginPortal" id="playerName" placeholder="Register Name"></label>
+<label id="inputEmail"></label>
+<button onclick="newRegister()">Register</button>
+<script>
+    class Player {
+        constructor(name, email, pass) {
+            this.name = name;
+            this.email = email;
+            this.pass = pass;
+            this.money = 1000;
+        }
+    }
+
+    function LoadingUser(player) {
+        let data = loadData();
+
+        data.push(player);
+        localStorage.setItem("players", JSON.stringify(data));
+    }
+
+    function login() {
+        let username = document.getElementById('username').value;
+        let pass = document.getElementById('password').value;
+        let players = loadData();
+        let loginStatus = false;
+        for (const player of players) {
+            if (player.email === username && player.pass === pass) {
+                alert("Login successful!")
+                localStorage.setItem('currentUser', JSON.stringify(player));
+                window.location.href = "index.html";
+                loginStatus = true
+                break;
+            } else {
+                loginStatus = false;
+            }
+        }
+        if (!loginStatus) {
+            alert("Wrong Email or Password")
+        }
+    }
+
+    let player1 = new Player("Hai Do", "haido@gmail.com", "123123");
+    LoadingUser(player1);
+
+
+    function newRegister() {
+
+    }
+
+
+</script>
+</body>
+</html>

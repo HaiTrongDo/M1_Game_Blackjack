@@ -1,6 +1,10 @@
-const PLAYER_NAME = "Mr.Do"//prompt("Please Enter Your Name")
-let PlayernameEl = document.getElementById("Playername-El")
-PlayernameEl.innerText = `Welcome ${PLAYER_NAME.toUpperCase()} to the BlackJack Game`
+const MAX_SCORE = 21;
+const MIN_DEALER_SCORE = 17;
+let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+let PLAYER_NAME = currentUser.name;
+// let PLAYER_NAME = "Mr.Do"//prompt("Please Enter Your Name")
+let playerNameEl = document.getElementById("playerName-El")
+playerNameEl.innerText = `Welcome ${PLAYER_NAME.toUpperCase()} to the BlackJack Game`
 let messageEl = document.getElementById("message-el")
 let sumEl = document.getElementById("sum-el")
 let yourCardEl = document.getElementById("yourCard-el")
@@ -13,7 +17,7 @@ let bettingEl = document.getElementById("betting-el")
 let Player1CoinsEl = document.getElementById("Player1Coins-el")
 let backCard = `<img src="CardImages/BACK.png" width='120px' alt="Back of the card">`
 let deck = new deckBuilder();
-let Player1 = new Players(PLAYER_NAME, 1000);
+let Player1 = new Players(currentUser.name, currentUser.money);
 let dealer = new Dealer()
 let cardPlayer = []
 let cardDealer = []
@@ -32,7 +36,7 @@ function startGame() {
             alert("You have a Blackjack")
         }
         //xóa message chào đón người chơi
-        PlayernameEl.innerText = ""
+        playerNameEl.innerText = ""
     } else { //nếu bài đã được tạo thì tức là game đang chay, khi này hướng dẫn người chơi chọn hit/stay
         alert(`Game is on going, press "Hit" or "Stay" button of your choise`)
     }
@@ -56,10 +60,12 @@ function showListCardPlayer() {
         player1SumCardsValue += cardPlayer[i].score;
         html += cardPlayer[i].getHtml() + " ";
         // if( cardPlayer[i].value === "A" && )
-        if (cardPlayer[i].value === "A") { // cắm cờ để phát hiện bài có A để tính điểm khác đi
+        if (cardPlayer[i].getValue() === "A") { // cắm cờ để phát hiện bài có A để tính điểm khác đi
             Player1._flagAce = true;
         }
-        if (cardPlayer[i].value === "J" || cardPlayer[i].value === "Q" || cardPlayer[i].value === "K") { // cắm cờ để phát hiện bài có A để tính điểm khác đi
+        if (cardPlayer[i].getValue() === "J"
+            || cardPlayer[i].getValue() === "Q"
+            || cardPlayer[i].getValue() === "K") { // cắm cờ để phát hiện bài có A để tính điểm khác đi
             Player1._flagPicture = true;
         }
     }
@@ -74,7 +80,7 @@ function showListCardPlayer() {
     console.log(Player1._score);
 
     // không gộp chung cùng hàm If bên trên vì nếu trong trường hợp có "A" thì hàm sẽ thực hiện sai. tức là tổng điểm có thể cao hơn 21 mà vẫn chưa hết game.
-    if (player1SumCardsValue >= 21) {
+    if (player1SumCardsValue >= MAX_SCORE) {
         processDealerGame()
     }
 }
@@ -86,11 +92,12 @@ function processDealerGame() { //gọi khi bấm Stay button
     cardDealer.push(dealerFirstCard, dealerSecondCard)
     showListCardDealer()
     getCardforDealer()
-    checkingWin()
+    setTimeout(checkingWin, 1000)
+    // checkingWin()
 }
 
 function getCardforDealer() {
-    if (dealer._score < 17) {
+    if (dealer._score < MIN_DEALER_SCORE) {
         let currentCardValue = deck.getRandomCard()
         cardDealer.push(currentCardValue)
         showListCardDealer()
@@ -108,7 +115,7 @@ function showListCardDealer() {
             cardDealer._flagAce = true
         }
     }
-    if (dealerSumCardsValue > 21) {
+    if (dealerSumCardsValue > MAX_SCORE) {
         if (cardDealer._flagAce === true) {
             dealerSumCardsValue -= 9;
             cardDealer._flagAce = false
@@ -123,44 +130,30 @@ function showListCardDealer() {
 function refreshGame() {
     if (confirm("Are you sure to refresh the game?")) {
         messageEl.innerHTML = `${PLAYER_NAME.toUpperCase()}, Let's play one more game ?`;
-        bettingEl.innerHTML = ""
         cardDealer = [];
         cardPlayer = [];
         deck.cards = [];
-        Player1._aliveStatus = false;
         showListCardPlayer();
         showListCardDealer();
-        sumEl.innerHTML = "";
-        yourCardEl.innerHTML = "";
-        dealerSumEl.innerHTML = "";
-        dealerCardEl.innerHTML = "";
-        messageEl.style.color = "lightyellow";
-        hitBtnEl.disabled = false;
-        stayBtnEl.disabled = false;
-        startBtnEl.disabled = false;
-        Player1._flagAce = false;
-        Player1._doubleAceCheck = false;
-        Player1._flagPicture = false; //reset lại cờ
-        Player1.bettingAmount = 0;
-        dealer.status = true;
-        dealer._flagAce = false;
-        dealer._doubleAceCheck = false;
-        dealer._flagPicture = false;
-        dealer._score = 0
+        restartMessage()
+        enableButton()
+        Player1.playerRestart()
+        dealer.dealerRestart();
+
     }
 }
 
 function checkingWin() {
     messageEl.style.color = "red"
-    if (Player1._score > 21) {
+    if (Player1._score > MAX_SCORE) {
         messageEl.innerHTML = "You are OUT of the game!!!!"
         Player1._coins -= Player1.bettingAmount;
-    } else if (Player1._score === dealer._score) {
+    } else if (checkGameTie()) {
         messageEl.innerHTML = "Game Tie!!"
-    } else if (Player1._score < dealer._score && dealer._score <= 21) {
+    } else if (checkingDealerWin()) {
         messageEl.innerHTML = "You LOSE!"
         Player1._coins -= Player1.bettingAmount;
-    } else if (Player1._score > dealer._score || dealer._score > 21) {
+    } else if (checkingPlayerWin()) {
         messageEl.innerHTML = "You WON the game!!!!"
         Player1._coins += Player1.bettingAmount;
     }
@@ -174,3 +167,30 @@ function checkingWin() {
     }
 }
 
+function checkGameTie() {
+    return Player1._score === dealer._score;
+}
+
+function checkingPlayerWin() {
+    return Player1._score > dealer._score || dealer._score > MAX_SCORE;
+
+}
+
+function checkingDealerWin() {
+    return Player1._score < dealer._score && dealer._score <= MAX_SCORE;
+}
+
+function restartMessage() {
+    bettingEl.innerHTML = "";
+    sumEl.innerHTML = "";
+    yourCardEl.innerHTML = "";
+    dealerSumEl.innerHTML = "";
+    dealerCardEl.innerHTML = "";
+    messageEl.style.color = "lightyellow";
+}
+
+function enableButton() {
+    hitBtnEl.disabled = false;
+    stayBtnEl.disabled = false;
+    startBtnEl.disabled = false;
+}
