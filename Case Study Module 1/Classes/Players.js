@@ -1,6 +1,4 @@
 
-
-
 class Players {
     constructor (playerName,coinNumber) {
         this._name = playerName;

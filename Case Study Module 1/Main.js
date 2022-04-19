@@ -165,6 +165,16 @@ function checkingWin() {
         alert("You are out of Coins")
         Player1._aliveStatus = false
     }
+    updateData();
+}
+
+function updateData() {
+    let data = loadData();
+    let index = findUserByEmail(currentUser.email);
+    data[index].money = Player1._coins;
+    saveData(PLAYER_SAVE,data);
+    saveData(PLAYER_LOGIN,data[index]);
+
 }
 
 function checkGameTie() {
