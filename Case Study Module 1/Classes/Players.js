@@ -9,15 +9,17 @@ class Players {
         this._coins = coinNumber;
         this.bettingAmount = 0
     }
-    betting(){
-        this.bettingAmount = Number(prompt("Betting amount"))
+    betting(money){
+        // this.bettingAmount = Number(prompt("Betting amount"))
+        this.bettingAmount += money;
         if (this.bettingAmount > this._coins || this.bettingAmount <= 0){
             alert(`You only can bet between 0 - $${this._coins} or lower `)
-            Players.betting()
+            this.betting()
         }
         bettingEl.innerHTML = "Your Bet: " + this.bettingAmount
         Player1CoinsEl.innerHTML ="Your Coins: " + this._coins
     }
+
     playerRestart(){
         Player1._flagAce = false;
         Player1._doubleAceCheck = false;

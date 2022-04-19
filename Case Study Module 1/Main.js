@@ -21,10 +21,11 @@ let Player1 = new Players(currentUser.name, currentUser.money);
 let dealer = new Dealer()
 let cardPlayer = []
 let cardDealer = []
-
+Player1CoinsEl.innerHTML = "Your Coins: " + Player1._coins
 function startGame() {
     if (deck.cards.length === 0) { // nếu đã tồn tại bài rồi thì không được bấn start button nữa
-        Player1.betting()
+        // Player1.betting()
+        disableBet();
         deck.cardsDeck();
         deck.shuffleDeck();
         cardPlayer.push(deck.getRandomCard(), deck.getRandomCard());
@@ -33,7 +34,10 @@ function startGame() {
         dealerCardEl.innerHTML = `Dealer Card(s): <br> ${backCard} ${backCard}`;
         dealerSumEl.innerHTML = "Dealer's sum:"
         if (Player1._flagAce && Player1._flagPicture) {
-            alert("You have a Blackjack")
+            setTimeout(function () {
+
+                alert("You have a Blackjack")
+            },300);
         }
         //xóa message chào đón người chơi
         playerNameEl.innerText = ""
@@ -139,7 +143,7 @@ function refreshGame() {
         enableButton()
         Player1.playerRestart()
         dealer.dealerRestart();
-
+        enableBet();
     }
 }
 
@@ -203,4 +207,18 @@ function enableButton() {
     hitBtnEl.disabled = false;
     stayBtnEl.disabled = false;
     startBtnEl.disabled = false;
+}
+
+function disableBet() {
+    let bets = document.getElementsByClassName('bet');
+    for (const bet of bets) {
+        bet.disabled = true;
+    }
+}
+
+function enableBet() {
+    let bets = document.getElementsByClassName('bet');
+    for (const bet of bets) {
+        bet.disabled = false;
+    }
 }
