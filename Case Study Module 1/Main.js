@@ -22,6 +22,10 @@ let dealer = new Dealer()
 let cardPlayer = []
 let cardDealer = []
 Player1CoinsEl.innerHTML = "Your Coins: " + Player1._coins
+
+disableButton_start_hit_stay() // người chơi phải đặt cọc (bet) trước khi chơi
+
+
 function startGame() {
     if (deck.cards.length === 0) { // nếu đã tồn tại bài rồi thì không được bấn start button nữa
         // Player1.betting()
@@ -37,7 +41,7 @@ function startGame() {
             setTimeout(function () {
 
                 alert("You have a Blackjack")
-            },300);
+            }, 300);
         }
         //xóa message chào đón người chơi
         playerNameEl.innerText = ""
@@ -143,6 +147,7 @@ function refreshGame() {
         enableButton()
         Player1.playerRestart()
         dealer.dealerRestart();
+        disableButton_start_hit_stay()
         enableBet();
     }
 }
@@ -162,9 +167,7 @@ function checkingWin() {
         Player1._coins += Player1.bettingAmount;
     }
     Player1CoinsEl.innerHTML = "Your Coins: " + Player1._coins
-    hitBtnEl.disabled = true;
-    stayBtnEl.disabled = true;
-    startBtnEl.disabled = true;
+    disableButton_start_hit_stay()
     if (Player1._coins <= 0) {
         alert("You are out of Coins")
         Player1._aliveStatus = false
@@ -172,12 +175,24 @@ function checkingWin() {
     updateData();
 }
 
+function disableButton_start_hit_stay() {
+    hitBtnEl.disabled = true;
+    stayBtnEl.disabled = true;
+    startBtnEl.disabled = true;
+}
+
+function ensableButton_start_hit_stay() {
+    hitBtnEl.disabled = false;
+    stayBtnEl.disabled = false;
+    startBtnEl.disabled = false;
+}
+
 function updateData() {
     let data = loadData();
     let index = findUserByEmail(currentUser.email);
     data[index].money = Player1._coins;
-    saveData(PLAYER_SAVE,data);
-    saveData(PLAYER_LOGIN,data[index]);
+    saveData(PLAYER_SAVE, data);
+    saveData(PLAYER_LOGIN, data[index]);
 
 }
 

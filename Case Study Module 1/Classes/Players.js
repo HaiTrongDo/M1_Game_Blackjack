@@ -18,6 +18,7 @@ class Players {
         }
         bettingEl.innerHTML = "Your Bet: " + this.bettingAmount
         Player1CoinsEl.innerHTML ="Your Coins: " + this._coins
+        ensableButton_start_hit_stay()
     }
 
     playerRestart(){
