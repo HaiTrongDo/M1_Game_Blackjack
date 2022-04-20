@@ -181,7 +181,7 @@ function disableButton_start_hit_stay() {
     startBtnEl.disabled = true;
 }
 
-function ensableButton_start_hit_stay() {
+function enableButton_start_hit_stay() {
     hitBtnEl.disabled = false;
     stayBtnEl.disabled = false;
     startBtnEl.disabled = false;
