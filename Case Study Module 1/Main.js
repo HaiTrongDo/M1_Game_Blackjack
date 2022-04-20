@@ -37,9 +37,8 @@ function startGame() {
         messageEl.innerHTML = "Do you want more cards?"
         dealerCardEl.innerHTML = `Dealer Card(s): <br> ${backCard} ${backCard}`;
         dealerSumEl.innerHTML = "Dealer's sum:"
-        if (Player1._flagAce && Player1._flagPicture) {
+        if (checkBlackjack()) {
             setTimeout(function () {
-
                 alert("You have a Blackjack")
             }, 300);
         }
@@ -79,8 +78,11 @@ function showListCardPlayer() {
     }
     if (player1SumCardsValue > 21) {// kiểm tra nếu lớn hơn 21 điếm thì "A" có thể được tính là 1 thay vì 10 điểm
         if (Player1._flagAce) {
-            player1SumCardsValue -= 9
+            player1SumCardsValue -= 9;
         }
+    }
+    if (checkBlackjack()){
+        player1SumCardsValue = 21;
     }
     sumEl.innerHTML = 'My Sum: ' + player1SumCardsValue
     yourCardEl.innerHTML = `${PLAYER_NAME.toUpperCase()}'s Card(s) <br>` + html;
@@ -154,7 +156,10 @@ function refreshGame() {
 
 function checkingWin() {
     messageEl.style.color = "red"
-    if (Player1._score > MAX_SCORE) {
+    if(checkBlackjack()){
+        messageEl.innerHTML = "You are Have a Blackjack bet X2!!!!"
+        Player1._coins += Player1.bettingAmount*2;
+    } else if (Player1._score > MAX_SCORE) {
         messageEl.innerHTML = "You are OUT of the game!!!!"
         Player1._coins -= Player1.bettingAmount;
     } else if (checkGameTie()) {
@@ -236,4 +241,8 @@ function enableBet() {
     for (const bet of bets) {
         bet.disabled = false;
     }
+}
+
+function checkBlackjack(){
+    return Player1._flagAce && Player1._flagPicture
 }
