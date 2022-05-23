@@ -7,12 +7,7 @@ class Player {
     }
 }
 
-function LoadingUser(player) {
-    let data = loadData();
 
-    data.push(player);
-    localStorage.setItem("players", JSON.stringify(data));
-}
 
 function login() {
     let username = document.getElementById('username').value;
@@ -23,7 +18,7 @@ function login() {
         if (player.email === username && player.pass === pass) {
             alert("Login successful!")
             localStorage.setItem('currentUser', JSON.stringify(player));
-            window.location.href = "../index.html";
+            window.location.href = "../GamePLay/GamePlay.html";
             loginStatus = true
             clearInput()
             break;
@@ -37,18 +32,12 @@ function login() {
     clearInput()
 }
 
-
-function newRegister() {
-    let userEmail = document.getElementById('username').value;
-    let pass = document.getElementById('password').value;
-    let name = document.getElementById('playerName').value;
-    let player = new Player(name, userEmail, pass)
-    LoadingUser(player)
-    clearInput()
-}
-
 function clearInput() {
     document.getElementById('username').innerHTML = ""
     document.getElementById('password').innerHTML = ""
     document.getElementById('playerName').innerHTML = ""
+}
+
+function moveToRegister(){
+    window.location.href = "./register/register.html";
 }

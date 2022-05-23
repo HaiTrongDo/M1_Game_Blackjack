@@ -2,24 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login portal</title>
     <script src="data.js" defer></script>
     <script src="Login.js" defer></script>
-    <link rel="stylesheet" href="../CSS/login-portal.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-<div class = "container">
-    <label><input class="loginPortal" id="username" placeholder="Email"></label><br>
-    <label><input type="password" class="loginPortal" id="password" placeholder="Password"></label><br>
-    <label><input type="text" class="loginPortal" id="playerName" placeholder="Register Name"></label><br>
-    <label id="inputEmail"></label><br>
-    <button onclick="login()">Login</button>
-    <button onclick="newRegister()">Register</button>
-    <br>
+
+<div class="row">
+
+    <div class="header col-md-12">
+        <nav class="navbar navbar-dark bg-dark"> <!--search input -->
+            <div class="container-fluid">
+                <a class="navbar-brand rounded"><img src="../Background%20Image/100.png" alt="logo"
+                                                     class="rounded-circle" width="100" height="100"> Black Jack Game,
+                    where all the fun begins</a>
+                <div>
+                    <div class="md-12 d-flex flex-row">
+                        <a target="_blank" href=""> Home </a>
+                        <a target="_blank" href=""> Facebook </a>
+                        <a target="_blank" href=""> Youtube </a>
+                    </div>
+                    <span class="d-flex md-12">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </span>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="content col-md-12">
+        <section class="h-100 gradient-form" style="background-color: #eee;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-xl-10">
+                        <div class="card rounded-3 text-black">
+                            <div class="row g-0">
+                                <div class="col-lg-6">
+                                    <div class="card-body p-md-5 mx-md-4">
+                                        <div class="text-center">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                                                 style="width: 185px;" alt="logo">
+                                            <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+                                        </div>
+                                            <p>Please login to your account</p>
+
+                                            <div class="form-outline mb-4">
+                                                <input type="email" id="username" class="form-control"
+                                                       placeholder="Phone number or email address"/>
+                                                <label class="form-label" for="username">Username</label>
+                                            </div>
+
+                                            <div class="form-outline mb-4">
+                                                <input type="password" id="password" class="form-control"
+                                                       placeholder="password"/>
+                                                <label class="form-label" for="password">Password</label>
+                                            </div>
+
+                                            <div class="text-center pt-1 mb-5 pb-1">
+                                                <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                        onclick="login()" type="button">Log in
+                                                </button>
+                                                <br>
+                                                <a class="text-muted" href="#">Forgot password?</a>
+                                            </div>
+
+                                            <div class="d-flex align-items-center justify-content-center pb-4">
+                                                <p class="mb-0 me-2">Don't have an account?</p>
+                                                <button type="button" class="btn btn-outline-danger" onclick="moveToRegister()">Create new</button>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                    <img src="../Background%20Image/sideimage.jpg" width="100%" height="100%" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
+<div class="footer col-12 "></div>
+
+
+
 <a href="https://gamevh.net/cms/static/guide_blackjack.jsp" target="_blank">Hướng Dẫn Chơi - Tiếng Việt</a> <br>
 <a href="https://www.cardplayer.com/blackjack/introduction" target="_blank">Game Introduction - English</a>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ class Card {
     }
 
     getHtml() {
-        let html = `<img class="images" src="CardImages/${this.value + "-" + this.suit}.png" 
+        let html = `<img class="images" src="../CardImages/${this.value + "-" + this.suit}.png" 
                     alt="${this.value + "-" + this.suit}.png"
                     width="120px">`;
         return html;

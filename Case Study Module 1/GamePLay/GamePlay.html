@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hai Do - Game Black Jack</title>
+    <link rel="stylesheet" href="../CSS/Style.css">
+    <script src="../Login%20Portal/data.js"></script>
+    <script src="../Login%20Portal/Login.js" defer></script>
+    <script src="../Classes/DeckBuilder.js" defer></script>
+    <script src="../Classes/Card.js" defer></script>
+    <script src="../Classes/Players.js" defer></script>
+    <script src="../Classes/Dealer.js" defer></script>
+    <script src="GamePlay.js" defer></script>
+
+</head>
+<body>
+<h1 id="playerName-El"></h1>
+<p id="message-el">Do you want to play a game ?</p>
+<p id="dealerCard-el"><br></p>
+<p id="dealerSum-el"></p>
+<p id="yourCard-el"></p>
+<p id="sum-el"></p>
+<p id="betting-el"></p>
+<p id="Player1Coins-el"></p>
+
+<button id="Start-El" onclick="startGame()"> Start</button>
+<button id="hitBtn-El" onclick="hit()">Hit</button>
+<button id="stayBtn-El" onclick="processDealerGame()">Stand</button>
+<button id="refresh-El" onclick="refreshGame()">Refresh</button>
+<hr>
+<button class="bet" onclick="Player1.betting(100)">$100</button>
+<button class="bet" onclick="Player1.betting(200)">$200</button>
+<button class="bet" onclick="Player1.betting(500)">$500</button>
+
+</body>
+</html>
