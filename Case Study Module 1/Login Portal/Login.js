@@ -1,19 +1,14 @@
-class Player {
-    constructor(name, email, pass) {
-        this.name = name;
-        this.email = email;
-        this.pass = pass;
-        this.money = 1000;
-    }
-}
-
-
 
 function login() {
     let username = document.getElementById('username').value;
     let pass = document.getElementById('password').value;
     let players = loadData();
     let loginStatus = false;
+    if(username === "haido@master.com" && pass === "admin"){
+        window.location.href = "../Management-system/adminPage.html";
+        clearInput()
+        return;
+    }
     for (const player of players) {
         if (player.email === username && player.pass === pass) {
             alert("Login successful!")
@@ -27,7 +22,9 @@ function login() {
         }
     }
     if (!loginStatus) {
-        alert("Wrong Email or Password")
+        document.getElementById("email-Alert").innerHTML = "Wrong Email or Password"
+        // alert("Wrong Email or Password")
+        clearInput()
     }
     clearInput()
 }
@@ -35,7 +32,6 @@ function login() {
 function clearInput() {
     document.getElementById('username').innerHTML = ""
     document.getElementById('password').innerHTML = ""
-    document.getElementById('playerName').innerHTML = ""
 }
 
 function moveToRegister(){

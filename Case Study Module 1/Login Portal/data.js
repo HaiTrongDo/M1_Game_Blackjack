@@ -14,7 +14,6 @@ function saveData(key,data) {
 
 function findUserByEmail(email) {
     let data = loadData();
-    console.log(data)
     for (const index in data) {
         if(data[index].email === email){
             return index;

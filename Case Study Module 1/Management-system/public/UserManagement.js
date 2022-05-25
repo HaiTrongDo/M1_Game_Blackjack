@@ -1,13 +1,9 @@
-// import {UserClass} from "./Classes/UserClass.js";
 var UserManagement = /** @class */ (function () {
     function UserManagement() {
         this.userList = [];
     }
-    UserManagement.prototype.deleteUserOnTable = function (removeIndex) {
-        var systemData = this.getData();
-        systemData.splice(removeIndex, 1);
-        localStorage.setItem("players", JSON.stringify(systemData));
-        this.showDataTable();
+    UserManagement.prototype.saveData = function (currentData) {
+        localStorage.setItem("players", JSON.stringify(currentData));
     };
     UserManagement.prototype.getData = function () {
         this.userList = [];
@@ -17,19 +13,66 @@ var UserManagement = /** @class */ (function () {
         return this.userList;
     };
     UserManagement.prototype.showDataTable = function () {
-        var table = '';
         var systemData = this.getData();
-        if (!systemData)
-            return table += "<tr>No data</tr>";
+        this.drawTable(systemData);
+    };
+    UserManagement.prototype.drawTable = function (systemData) {
+        var table = '';
+        if (!systemData.length)
+            return document.getElementById("userTable").innerHTML = "<tr>No data</tr>";
+        table += "    <tr>\n                        <th>No.</th>\n                        <th>First Name</th>\n                        <th>Last Name </th>\n                        <th>Email</th>\n                        <th>Password</th>\n                        <th>Coin</th>\n                        <th>ID</th>\n                        <th>Delete</th>\n                        <th>Edit</th>\n                        </tr>";
         for (var i = 0; i < systemData.length; i++) {
-            table += "<tr>\n                            <th>No.".concat(i + 1, "</th>\n                            <td>").concat(systemData[i].name, "</td>\n                            <td>").concat(systemData[i].lastName, "</td>\n                            <td>").concat(systemData[i].email, "</td>\n                            <td>").concat(systemData[i].pass, "</td>\n                            <td>").concat(systemData[i].money, "</td>\n                            <td><button class=\"btn btn-danger\" onclick=\"deleteUserOnTable(").concat(i, ")\">Delete</button></td>\n                            <td><button class=\"btn btn-info\" onclick=\"editUser(").concat(i, ")\">Edit</button></td>\n                            </tr>");
+            table += "<tr>\n                            <th>No.".concat(i + 1, "</th>\n                            <td>").concat(systemData[i].name, "</td>\n                            <td>").concat(systemData[i].lastName, "</td>\n                            <td>").concat(systemData[i].email, "</td>\n                            <td>").concat(systemData[i].pass, "</td>\n                            <td>").concat(systemData[i].money, "</td>\n                            <td>").concat(systemData[i].playerId, "</td>\n                            <td><button class=\"btn btn-danger delete-user\" value=\"").concat(i, "\">Delete</button></td>\n                            <td><button class=\"btn btn-primary edit-user\" value=\"").concat(i, "\" data-bs-target=\"#exampleModal\" data-bs-toggle=\"modal\"\n                    data-bs-whatever=\"@fat\"\n                    type=\"button\">Edit\n            </button></td>\n                            </tr>");
         }
-        document.getElementById("userTable").innerHTML += table;
+        document.getElementById("userTable").innerHTML = table;
     };
     UserManagement.prototype.editUser = function (index) {
+        var players = this.getData();
+        document.getElementById("recipient-firstName")["value"] = players[index].name;
+        document.getElementById("recipient-lastName")["value"] = players[index].lastName;
+        document.getElementById("recipient-email")["value"] = players[index].email;
+        document.getElementById("recipient-Coin")["value"] = players[index].money;
+        localStorage.setItem("currentEditing", JSON.stringify(players[index]));
+    };
+    UserManagement.prototype.saveEdit = function () {
+        var index = this.findUserByID();
+        var players = this.getData();
+        players[index].name = document.getElementById("recipient-firstName")["value"];
+        players[index].lastName = document.getElementById("recipient-lastName")["value"];
+        players[index].email = document.getElementById("recipient-email")["value"];
+        players[index].money = document.getElementById("recipient-Coin")["value"];
+        this.saveData(players);
+        // this.showDataTable();
+        localStorage.removeItem("currentEditing");
+        document.location.reload();
+    };
+    UserManagement.prototype.findUserByID = function () {
+        var data = this.getData();
+        var currentEditingPlayer = JSON.parse(localStorage.getItem('currentEditing'));
+        for (var index in data) {
+            if (data[index].playerId === currentEditingPlayer.playerId) {
+                return index;
+            }
+        }
+    };
+    UserManagement.prototype.deleteUser = function (index) {
+        var players = this.getData();
+        players.splice(index, 1);
+        this.saveData(players);
+        this.showDataTable();
+    };
+    UserManagement.prototype.searchItem = function (filterCharters) {
+        var data = this.getData();
+        var findStatus = false;
+        var newData = data.filter(function (obj) {
+            return (obj.name.toUpperCase().includes(filterCharters.toUpperCase()) ||
+                obj.lastName.toUpperCase().includes(filterCharters.toUpperCase()) ||
+                obj.email.toUpperCase().includes(filterCharters.toUpperCase()));
+        });
+        console.log(newData);
+        this.drawTable(newData);
     };
     return UserManagement;
 }());
-var userList = new UserManagement();
-userList.showDataTable();
+export { UserManagement };
 //# sourceMappingURL=UserManagement.js.map

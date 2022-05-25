@@ -19,16 +19,22 @@ import {UserClass} from "./UserClass.js";
      }
 
      showDataTable() {
-         let table = ''
          let systemData = this.getData()
-         if (!systemData) return table += `<tr>No data</tr>`;
-            table +=`    <tr>
+         this.drawTable(systemData)
+     }
+
+
+     drawTable(systemData){
+         let table = ''
+         if (!systemData.length) return document.getElementById("userTable").innerHTML = `<tr>No data</tr>`;
+         table +=`    <tr>
                         <th>No.</th>
                         <th>First Name</th>
                         <th>Last Name </th>
                         <th>Email</th>
                         <th>Password</th>
                         <th>Coin</th>
+                        <th>ID</th>
                         <th>Delete</th>
                         <th>Edit</th>
                         </tr>`
@@ -40,6 +46,7 @@ import {UserClass} from "./UserClass.js";
                             <td>${systemData[i].email}</td>
                             <td>${systemData[i].pass}</td>
                             <td>${systemData[i].money}</td>
+                            <td>${systemData[i].playerId}</td>
                             <td><button class="btn btn-danger delete-user" value="${i}">Delete</button></td>
                             <td><button class="btn btn-primary edit-user" value="${i}" data-bs-target="#exampleModal" data-bs-toggle="modal"
                     data-bs-whatever="@fat"
@@ -52,23 +59,37 @@ import {UserClass} from "./UserClass.js";
 
 
      editUser(index){
-         let players = this.getData()
-         document.getElementById("recipient-firstName").value = players[index].name
-         document.getElementById("recipient-lastName").value = players[index].lastName
-         document.getElementById("recipient-email").value = players[index].email
-         document.getElementById("recipient-Coin").value = players[index].money
+         let players:any = this.getData()
+         document.getElementById("recipient-firstName")["value"] = players[index].name
+         document.getElementById("recipient-lastName")["value"] = players[index].lastName
+         document.getElementById("recipient-email")["value"] = players[index].email
+         document.getElementById("recipient-Coin")["value"] = players[index].money
+         localStorage.setItem("currentEditing", JSON.stringify(players[index]))
      }
 
-     saveEdit(index){
+     saveEdit(){
+         let index = this.findUserByID()
          let players = this.getData()
-         players[index].name = document.getElementById("recipient-firstName").value;
-         players[index].lastName = document.getElementById("recipient-lastName").value;
-         players[index].email = document.getElementById("recipient-email").value
-         players[index].money = document.getElementById("recipient-Coin").value
-
+         players[index].name = document.getElementById("recipient-firstName")["value"];
+         players[index].lastName = document.getElementById("recipient-lastName")["value"];
+         players[index].email = document.getElementById("recipient-email")["value"]
+         players[index].money = document.getElementById("recipient-Coin")["value"]
          this.saveData(players)
-         this.showDataTable();
+         // this.showDataTable();
+         localStorage.removeItem("currentEditing")
+         document.location.reload()
      }
+
+     findUserByID(){
+         let data = this.getData()
+         let currentEditingPlayer = JSON.parse(localStorage.getItem('currentEditing'))
+         for (const index in data) {
+             if(data[index].playerId === currentEditingPlayer.playerId){
+                 return index;
+             }
+         }
+     }
+
 
      deleteUser(index: number): void {
          let players = this.getData()
@@ -76,6 +97,21 @@ import {UserClass} from "./UserClass.js";
          this.saveData(players)
          this.showDataTable();
      }
+
+     searchItem(filterCharters) {
+         let data = this.getData()
+         let findStatus = false
+         let newData = data.filter((obj) =>{
+             return (
+                    obj.name.toUpperCase().includes(filterCharters.toUpperCase()) ||
+                     obj.lastName.toUpperCase().includes(filterCharters.toUpperCase())||
+                     obj.email.toUpperCase().includes(filterCharters.toUpperCase())
+             )
+         })
+         console.log(newData);
+         this.drawTable(newData)
+     }
+
  }
 
 

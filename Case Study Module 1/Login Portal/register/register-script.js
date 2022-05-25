@@ -3,11 +3,14 @@ myApp.controller("RegisterCtrl", function ($scope) {
 });
 
 class Player {
-    constructor(name, email, pass) {
-        this.name = name;
+    static id = 100
+    constructor(firstName,lastName, email, password) {
+        this.name = firstName;
+        this.lastName = lastName
         this.email = email;
-        this.pass = pass;
+        this.pass = password;
         this.money = 1000;
+        this.playerId = Player.id++
     }
 }
 
@@ -18,12 +21,11 @@ function newRegister() {
     let password = document.getElementById('password-register-el').value;
     let firstName = document.getElementById('first-name-register').value;
     let lastName = document.getElementById('last-name-register').value;
-    let player = new Player(firstName, userEmail, password)
-    console.log(player)
+    let player = new Player(firstName, lastName, userEmail, password)
     LoadingUser(player)
-    clearInputInRegister()
     alert('register is succeed')
-    window.location.href = "../login.html";
+    clearInputInRegister()
+    // window.location.href = "../login.html";
 }
 
 function LoadingUser(player) {
@@ -34,10 +36,10 @@ function LoadingUser(player) {
 
 
 function clearInputInRegister() {
-    document.getElementById('email-register-el').innerHTML = ""
-    document.getElementById('password-register-el').innerHTML = ""
-    document.getElementById('first-name-register').innerHTML = ""
-    document.getElementById('last-name-register').innerHTML = ""
+    document.getElementById('email-register-el').value = ""
+    document.getElementById('password-register-el').value = ""
+    document.getElementById('first-name-register').value = ""
+    document.getElementById('last-name-register').value = ""
 
 }
 

@@ -25,11 +25,8 @@ function updateButtonEdit() {
     let editUserButtons = document.getElementsByClassName('edit-user');
     for (let i = 0; i < editUserButtons.length; i++) {
         editUserButtons[i].addEventListener('click',  () => {
-             index = editUserButtons[i].getAttribute('value');
-            console.log(index)
+            index = editUserButtons[i].getAttribute('value');
             userList.editUser(+index);
-
-
             // goi lai ham uplodate de cap nhat deleteUserButtons
             updateButtonEdit();
         })
@@ -38,12 +35,22 @@ function updateButtonEdit() {
 function confirmButton(){
     let confirmUserButtons = document.getElementById('confirm');
     confirmUserButtons.addEventListener('click', ()=>{
-        userList.saveEdit(index);
+        userList.saveEdit();
     })
 }
 confirmButton()
 updateButtonEdit()
 
+
+function updateSearchButton() {
+    let SearchButton = document.getElementById("searchBarEl")
+    // let SearchButton = document.getElementById("searchButton");
+    SearchButton.addEventListener('keyup',(e)=>{
+        let filterCharters = e.target["value"];
+        userList.searchItem(filterCharters);
+    })
+}
+updateSearchButton()
 
 
 

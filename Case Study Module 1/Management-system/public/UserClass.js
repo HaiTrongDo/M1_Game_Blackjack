@@ -8,4 +8,5 @@ var UserClass = /** @class */ (function () {
     }
     return UserClass;
 }());
+export { UserClass };
 //# sourceMappingURL=UserClass.js.map

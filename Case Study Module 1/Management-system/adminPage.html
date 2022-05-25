@@ -1,80 +1,125 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Management System</title>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons'>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vuetify@2.0.0/dist/vuetify.min.css'><link rel="stylesheet" href="./style.css">
-
+    <meta charset="UTF-8">
+    <title>Management System</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel='stylesheet'>
+    <link href='https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Material+Icons' rel='stylesheet'>
+    <link href='https://cdn.jsdelivr.net/npm/vuetify@2.0.0/dist/vuetify.min.css' rel='stylesheet'>
+    <link href="style.css" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
 </head>
 <body>
+
+
 <!-- partial:index.partial.html -->
 <div id="app">
-  <v-app id="inspire">
-   <v-app-bar
-      app
-      clipped-left
-      color="red"
-    >
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <span class="title ml-3 mr-5">Black Jack&nbsp;<span class="font-weight-light">Game</span></span>
-      <v-text-field
-        solo-inverted
-        flat
-        hide-details
-        label="Search"
-        prepend-inner-icon="search"
-      ></v-text-field>
-      <v-spacer></v-spacer>
-    </v-app-bar>
- 
-      <v-navigation-drawer v-model="drawer" app clipped>
-        <v-list dense>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="title">
-            Hai Do
-            </v-list-item-title>
-            <v-list-item-subtitle>
-            haido@master.edu.com
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-  </v-list>
-        <v-divider></v-divider>
-  
-        <v-list dense>
-          <v-list-item
-            v-for="item in items"  :key="item.title"  link >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-    <v-content>
-      <v-container>
-          <div>
-              sadhjaskhdjklsahjkldala
+    <v-app id="inspire">
+        <v-app-bar app clipped-left color="red">
+            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+            <span class="title ml-3 mr-5">Black Jack&nbsp;<span class="font-weight-light">Game</span></span>
+            <span class="d-flex md-12">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchBarEl">
+                        <button class="btn btn-outline-success" type="submit" id="searchButton">Search</button>
+                    </span>
+        </v-app-bar>
+        <v-navigation-drawer app clipped v-model="drawer">
+            <v-list dense>
+                <v-list-item>
+                    <v-list-item-content>
+                        <v-list-item-title class="title">
+                            Hai Do
+                        </v-list-item-title>
+                        <v-list-item-subtitle>
+                            haido@master.com
+                        </v-list-item-subtitle>
+                        <v-list-item-subtitle>
+                            <div><a href="../Login%20Portal/login.html"> Log Out</a></div>
+                        </v-list-item-subtitle>
 
-          </div>
-<!--add your works here-->
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+            <v-divider>
 
-      </v-container>
-    </v-content>  
+            </v-divider>
+            <v-list dense>
+                <v-list-item
+                        :key="item.title" link v-for="item in items">
+                    <v-list-item-icon>
+                        <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+        </v-navigation-drawer>
+        <v-content>
+            <a target="_blank" href="../Login%20Portal/register/register.html">
+                <button class="btn btn-primary" type="button">Create
+                </button>
+            </a>
 
-  </v-app>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editing Information</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="recipient-firstName" class="col-form-label">Frist Name:</label>
+                                    <input type="text" class="form-control" id="recipient-firstName">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-lastName" class="col-form-label">Last Name:</label>
+                                    <input type="text" class="form-control" id="recipient-lastName">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-email" class="col-form-label">Email:</label>
+                                    <input type="text" class="form-control" id="recipient-email">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="recipient-Coin">
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm">Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <v-container>
+                <div>
+                    <table class="table table-sm" id="userTable">
+                    </table>
+                </div>
+                <!--add your works here-->
+            </v-container>
+        </v-content>
+    </v-app>
 </div>
 <!-- partial -->
-<script src='https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js'defer></script>
-<script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
-<script src='https://cdn.jsdelivr.net/npm/vuetify@2.0.0/dist/vuetify.min.js' defer></script>
-<script src="./script.js" defer></script>
+<script defer src='https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js'></script>
+<script defer src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+<script defer src='https://cdn.jsdelivr.net/npm/vuetify@2.0.0/dist/vuetify.min.js'></script>
+<script defer src="script.js"></script>
+<script crossorigin="anonymous"
+        defer integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script defer src="./public/Main.js" type="module"></script>
+<script defer src="public/SeachBar.js"></script>
 
 </body>
 </html>

@@ -15,5 +15,9 @@
     <orderEntry type="library" name="jquery-2.1.4" level="application" />
     <orderEntry type="library" name="materialize" level="application" />
     <orderEntry type="library" name="angular" level="application" />
+    <orderEntry type="library" name="@mdi/font" level="application" />
+    <orderEntry type="library" name="vuetify" level="application" />
+    <orderEntry type="library" name="babel-polyfill" level="application" />
+    <orderEntry type="library" name="vue" level="application" />
   </component>
 </module>
