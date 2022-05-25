@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "es2022",
+    "target": "es5",
+    "sourceMap": true,
+      "watch": true,
+    "outDir": "./public"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
