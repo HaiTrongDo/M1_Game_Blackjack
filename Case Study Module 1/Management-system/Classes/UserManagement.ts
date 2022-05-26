@@ -90,7 +90,6 @@ import {UserClass} from "./UserClass.js";
          }
      }
 
-
      deleteUser(index: number): void {
          let players = this.getData()
          players.splice(index, 1);
@@ -100,16 +99,89 @@ import {UserClass} from "./UserClass.js";
 
      searchItem(filterCharters) {
          let data = this.getData()
-         let findStatus = false
          let newData = data.filter((obj) =>{
              return (
                     obj.name.toUpperCase().includes(filterCharters.toUpperCase()) ||
-                     obj.lastName.toUpperCase().includes(filterCharters.toUpperCase())||
-                     obj.email.toUpperCase().includes(filterCharters.toUpperCase())
+                    obj.lastName.toUpperCase().includes(filterCharters.toUpperCase())||
+                    obj.email.toUpperCase().includes(filterCharters.toUpperCase())
              )
          })
-         console.log(newData);
          this.drawTable(newData)
+     }
+
+     sortByValue(value){
+         switch (value){
+             case "1":
+                 this.sortByName();
+                 break;
+             case "2":
+                 this.sortByCoin();
+                 break;
+             case "3":
+                 this.sortByFirstName();
+                 break;
+             case "4":
+                 this.sortByLastName();
+                 break;
+             case "5":
+                 this.sortByEmail();
+                 break;
+         }
+     }
+
+     sortByName(){
+         let data = this.getData()
+         data.sort(function(a, b){
+             if(a.id < b.id) { return -1; }
+             if(a.id > b.id) { return 1; }
+             return 0;
+         })
+
+         this.drawTable(data)
+         this.saveData(data)
+     }
+     sortByCoin(){
+         let data = this.getData()
+         data.sort(function(a, b){
+             if(a.money < b.money) { return -1; }
+             if(a.money > b.money) { return 1; }
+             return 0;
+         })
+         this.drawTable(data)
+         this.saveData(data)
+     }
+
+     sortByFirstName(){
+         let data = this.getData()
+         data.sort(function(a, b){
+             if(a.name < b.name) { return -1; }
+             if(a.name > b.name) { return 1; }
+             return 0;
+         })
+         this.drawTable(data)
+         this.saveData(data)
+     }
+
+     sortByLastName(){
+         let data = this.getData()
+         data.sort(function(a, b){
+             if(a.lastName < b.lastName) { return -1; }
+             if(a.lastName > b.lastName) { return 1; }
+             return 0;
+         })
+         this.drawTable(data)
+         this.saveData(data)
+     }
+
+     sortByEmail(){
+         let data = this.getData()
+         data.sort(function(a, b){
+             if(a.email < b.email) { return -1; }
+             if(a.email > b.email) { return 1; }
+             return 0;
+         })
+         this.drawTable(data)
+         this.saveData(data)
      }
 
  }

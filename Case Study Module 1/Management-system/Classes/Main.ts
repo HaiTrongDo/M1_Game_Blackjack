@@ -44,7 +44,6 @@ updateButtonEdit()
 
 function updateSearchButton() {
     let SearchButton = document.getElementById("searchBarEl")
-    // let SearchButton = document.getElementById("searchButton");
     SearchButton.addEventListener('keyup',(e)=>{
         let filterCharters = e.target["value"];
         userList.searchItem(filterCharters);
@@ -53,6 +52,13 @@ function updateSearchButton() {
 updateSearchButton()
 
 
+function updateSort(){
+   let  sortByEl =  document.getElementById("selectorEl")
+    sortByEl.addEventListener('change',(value) =>{
+        userList.sortByValue(value.target["value"])
+    } )
+}
+updateSort()
 
 
 
