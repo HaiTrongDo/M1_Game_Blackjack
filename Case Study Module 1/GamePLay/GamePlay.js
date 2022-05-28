@@ -17,7 +17,7 @@ let bettingEl = document.getElementById("betting-el")
 let Player1CoinsEl = document.getElementById("Player1Coins-el")
 let backCard = `<img src="../CardImages/BACK.png" width='120px' alt="Back of the card">`
 let deck = new deckBuilder();
-let Player1 = new Players(currentUser.name, currentUser.money);
+let Player1 = new Players(currentUser.name, Number(currentUser.money));
 let dealer = new Dealer()
 let cardPlayer = []
 let cardDealer = []

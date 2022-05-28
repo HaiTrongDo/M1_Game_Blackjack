@@ -21,9 +21,28 @@
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <span class="title ml-3 mr-5">Black Jack&nbsp;<span class="font-weight-light">Game</span></span>
             <span class="d-flex md-12">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchBarEl">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                               id="searchBarEl">
                         <button class="btn btn-outline-success" type="submit" id="searchButton">Search</button>
                     </span>
+            <span>
+                <a target="_blank" href="../Login%20Portal/register/register.html">
+                <button class="btn btn-primary" type="button">Create
+                </button>
+            </a>
+            </span>
+            <span>
+                <label>
+                    <select id="selectorEl" class="form-select" aria-label="Default select example">
+                        <option value="0">sort by</option>
+                        <option value="1">sort by ID</option>
+                        <option value="2">sort by Coin</option>
+                        <option value="3">sort by First Name</option>
+                        <option value="4">sort by Last Name</option>
+                        <option value="5">sort by Email</option>
+                    </select>
+                </label>
+            </span>
         </v-app-bar>
         <v-navigation-drawer app clipped v-model="drawer">
             <v-list dense>
@@ -58,11 +77,6 @@
             </v-list>
         </v-navigation-drawer>
         <v-content>
-            <a target="_blank" href="../Login%20Portal/register/register.html">
-                <button class="btn btn-primary" type="button">Create
-                </button>
-            </a>
-
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
@@ -86,6 +100,7 @@
                                     <input type="text" class="form-control" id="recipient-email">
                                 </div>
                                 <div class="mb-3">
+                                    <label for="recipient-Coin" class="col-form-label">Coin:</label>
                                     <input type="text" class="form-control" id="recipient-Coin">
                                 </div>
 

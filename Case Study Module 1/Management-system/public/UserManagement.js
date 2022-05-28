@@ -59,18 +59,106 @@ var UserManagement = /** @class */ (function () {
         var players = this.getData();
         players.splice(index, 1);
         this.saveData(players);
+        // document.location.reload()
         this.showDataTable();
     };
     UserManagement.prototype.searchItem = function (filterCharters) {
         var data = this.getData();
-        var findStatus = false;
         var newData = data.filter(function (obj) {
             return (obj.name.toUpperCase().includes(filterCharters.toUpperCase()) ||
                 obj.lastName.toUpperCase().includes(filterCharters.toUpperCase()) ||
                 obj.email.toUpperCase().includes(filterCharters.toUpperCase()));
         });
-        console.log(newData);
         this.drawTable(newData);
+    };
+    UserManagement.prototype.sortByValue = function (value) {
+        switch (value) {
+            case "1":
+                this.sortByName();
+                break;
+            case "2":
+                this.sortByCoin();
+                break;
+            case "3":
+                this.sortByFirstName();
+                break;
+            case "4":
+                this.sortByLastName();
+                break;
+            case "5":
+                this.sortByEmail();
+                break;
+        }
+    };
+    UserManagement.prototype.sortByName = function () {
+        var data = this.getData();
+        data.sort(function (a, b) {
+            if (a.playerId < b.playerId) {
+                return -1;
+            }
+            if (a.playerId > b.playerId) {
+                return 1;
+            }
+            return 0;
+        });
+        this.saveData(data);
+        document.location.reload();
+    };
+    UserManagement.prototype.sortByCoin = function () {
+        var data = this.getData();
+        data.sort(function (a, b) {
+            if (a.money < b.money) {
+                return -1;
+            }
+            if (a.money > b.money) {
+                return 1;
+            }
+            return 0;
+        });
+        this.saveData(data);
+        document.location.reload();
+    };
+    UserManagement.prototype.sortByFirstName = function () {
+        var data = this.getData();
+        data.sort(function (a, b) {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+            return 0;
+        });
+        this.saveData(data);
+        document.location.reload();
+    };
+    UserManagement.prototype.sortByLastName = function () {
+        var data = this.getData();
+        data.sort(function (a, b) {
+            if (a.lastName < b.lastName) {
+                return -1;
+            }
+            if (a.lastName > b.lastName) {
+                return 1;
+            }
+            return 0;
+        });
+        this.saveData(data);
+        document.location.reload();
+    };
+    UserManagement.prototype.sortByEmail = function () {
+        var data = this.getData();
+        data.sort(function (a, b) {
+            if (a.email < b.email) {
+                return -1;
+            }
+            if (a.email > b.email) {
+                return 1;
+            }
+            return 0;
+        });
+        this.saveData(data);
+        document.location.reload();
     };
     return UserManagement;
 }());

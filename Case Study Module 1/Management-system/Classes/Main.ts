@@ -5,15 +5,26 @@ import {UserClass} from "./UserClass.js";
 let userList = new UserManagement()
 userList.showDataTable()
 updateButtonDelete()
-let index;
+// let index;
+loadWeb()
 
+
+
+
+
+function loadWeb() {
+updateSearchButton()
+confirmButton()
+updateButtonEdit()
+updateSort()
+}
 
 
 function updateButtonDelete() {
     let deleteUserButtons = document.getElementsByClassName('delete-user');
     for (let i = 0; i < deleteUserButtons.length; i++) {
         deleteUserButtons[i].addEventListener('click',  () => {
-             index = deleteUserButtons[i].getAttribute('value');
+            let index = deleteUserButtons[i].getAttribute('value');
             userList.deleteUser(+index);
             // goi lai ham uplodate de cap nhat deleteUserButtons
             updateButtonDelete();
@@ -25,8 +36,8 @@ function updateButtonEdit() {
     let editUserButtons = document.getElementsByClassName('edit-user');
     for (let i = 0; i < editUserButtons.length; i++) {
         editUserButtons[i].addEventListener('click',  () => {
-            index = editUserButtons[i].getAttribute('value');
-            userList.editUser(+index);
+            let indexEdit = editUserButtons[i].getAttribute('value');
+            userList.editUser(+indexEdit);
             // goi lai ham uplodate de cap nhat deleteUserButtons
             updateButtonEdit();
         })
@@ -38,8 +49,6 @@ function confirmButton(){
         userList.saveEdit();
     })
 }
-confirmButton()
-updateButtonEdit()
 
 
 function updateSearchButton() {
@@ -49,7 +58,7 @@ function updateSearchButton() {
         userList.searchItem(filterCharters);
     })
 }
-updateSearchButton()
+
 
 
 function updateSort(){
@@ -58,7 +67,6 @@ function updateSort(){
         userList.sortByValue(value.target["value"])
     } )
 }
-updateSort()
 
 
 

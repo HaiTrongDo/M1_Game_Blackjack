@@ -2,12 +2,19 @@ import { UserManagement } from "./UserManagement.js";
 var userList = new UserManagement();
 userList.showDataTable();
 updateButtonDelete();
-var index;
+// let index;
+loadWeb();
+function loadWeb() {
+    updateSearchButton();
+    confirmButton();
+    updateButtonEdit();
+    updateSort();
+}
 function updateButtonDelete() {
     var deleteUserButtons = document.getElementsByClassName('delete-user');
     var _loop_1 = function (i) {
         deleteUserButtons[i].addEventListener('click', function () {
-            index = deleteUserButtons[i].getAttribute('value');
+            var index = deleteUserButtons[i].getAttribute('value');
             userList.deleteUser(+index);
             // goi lai ham uplodate de cap nhat deleteUserButtons
             updateButtonDelete();
@@ -21,8 +28,8 @@ function updateButtonEdit() {
     var editUserButtons = document.getElementsByClassName('edit-user');
     var _loop_2 = function (i) {
         editUserButtons[i].addEventListener('click', function () {
-            index = editUserButtons[i].getAttribute('value');
-            userList.editUser(+index);
+            var indexEdit = editUserButtons[i].getAttribute('value');
+            userList.editUser(+indexEdit);
             // goi lai ham uplodate de cap nhat deleteUserButtons
             updateButtonEdit();
         });
@@ -37,15 +44,17 @@ function confirmButton() {
         userList.saveEdit();
     });
 }
-confirmButton();
-updateButtonEdit();
 function updateSearchButton() {
     var SearchButton = document.getElementById("searchBarEl");
-    // let SearchButton = document.getElementById("searchButton");
     SearchButton.addEventListener('keyup', function (e) {
         var filterCharters = e.target["value"];
         userList.searchItem(filterCharters);
     });
 }
-updateSearchButton();
+function updateSort() {
+    var sortByEl = document.getElementById("selectorEl");
+    sortByEl.addEventListener('change', function (value) {
+        userList.sortByValue(value.target["value"]);
+    });
+}
 //# sourceMappingURL=Main.js.map

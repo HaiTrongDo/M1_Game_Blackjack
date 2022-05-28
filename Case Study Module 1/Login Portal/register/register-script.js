@@ -3,14 +3,14 @@ myApp.controller("RegisterCtrl", function ($scope) {
 });
 
 class Player {
-    static id = 100
+    id = 100
     constructor(firstName,lastName, email, password) {
         this.name = firstName;
         this.lastName = lastName
         this.email = email;
         this.pass = password;
         this.money = 1000;
-        this.playerId = Player.id++
+        this.playerId = this.id++
     }
 }
 
@@ -25,7 +25,7 @@ function newRegister() {
     LoadingUser(player)
     alert('register is succeed')
     clearInputInRegister()
-    // window.location.href = "../login.html";
+    window.location.href = "../login.html";
 }
 
 function LoadingUser(player) {

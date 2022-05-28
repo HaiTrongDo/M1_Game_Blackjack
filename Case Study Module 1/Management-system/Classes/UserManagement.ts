@@ -58,7 +58,7 @@ import {UserClass} from "./UserClass.js";
      }
 
 
-     editUser(index){
+     editUser(index):void{
          let players:any = this.getData()
          document.getElementById("recipient-firstName")["value"] = players[index].name
          document.getElementById("recipient-lastName")["value"] = players[index].lastName
@@ -67,7 +67,7 @@ import {UserClass} from "./UserClass.js";
          localStorage.setItem("currentEditing", JSON.stringify(players[index]))
      }
 
-     saveEdit(){
+     saveEdit():void{
          let index = this.findUserByID()
          let players = this.getData()
          players[index].name = document.getElementById("recipient-firstName")["value"];
@@ -94,10 +94,11 @@ import {UserClass} from "./UserClass.js";
          let players = this.getData()
          players.splice(index, 1);
          this.saveData(players)
+         // document.location.reload()
          this.showDataTable();
      }
 
-     searchItem(filterCharters) {
+     searchItem(filterCharters:string):void {
          let data = this.getData()
          let newData = data.filter((obj) =>{
              return (
@@ -109,7 +110,8 @@ import {UserClass} from "./UserClass.js";
          this.drawTable(newData)
      }
 
-     sortByValue(value){
+
+     sortByValue(value:string){
          switch (value){
              case "1":
                  this.sortByName();
@@ -132,13 +134,12 @@ import {UserClass} from "./UserClass.js";
      sortByName(){
          let data = this.getData()
          data.sort(function(a, b){
-             if(a.id < b.id) { return -1; }
-             if(a.id > b.id) { return 1; }
+             if(a.playerId < b.playerId) { return -1; }
+             if(a.playerId > b.playerId) { return 1; }
              return 0;
          })
-
-         this.drawTable(data)
          this.saveData(data)
+         document.location.reload()
      }
      sortByCoin(){
          let data = this.getData()
@@ -147,8 +148,8 @@ import {UserClass} from "./UserClass.js";
              if(a.money > b.money) { return 1; }
              return 0;
          })
-         this.drawTable(data)
          this.saveData(data)
+         document.location.reload()
      }
 
      sortByFirstName(){
@@ -158,8 +159,8 @@ import {UserClass} from "./UserClass.js";
              if(a.name > b.name) { return 1; }
              return 0;
          })
-         this.drawTable(data)
          this.saveData(data)
+         document.location.reload()
      }
 
      sortByLastName(){
@@ -169,8 +170,8 @@ import {UserClass} from "./UserClass.js";
              if(a.lastName > b.lastName) { return 1; }
              return 0;
          })
-         this.drawTable(data)
          this.saveData(data)
+         document.location.reload()
      }
 
      sortByEmail(){
@@ -180,10 +181,9 @@ import {UserClass} from "./UserClass.js";
              if(a.email > b.email) { return 1; }
              return 0;
          })
-         this.drawTable(data)
          this.saveData(data)
+         document.location.reload()
      }
-
  }
 
 
