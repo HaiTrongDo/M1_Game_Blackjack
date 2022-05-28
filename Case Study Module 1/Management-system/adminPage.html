@@ -7,7 +7,7 @@
     <link href='https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Material+Icons' rel='stylesheet'>
     <link href='https://cdn.jsdelivr.net/npm/vuetify@2.0.0/dist/vuetify.min.css' rel='stylesheet'>
-    <link href="style.css" rel="stylesheet">
+<!--    <link href="style.css" rel="stylesheet">-->
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
 </head>
@@ -21,19 +21,19 @@
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <span class="title ml-3 mr-5">Black Jack&nbsp;<span class="font-weight-light">Game</span></span>
             <span class="d-flex md-12">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                               id="searchBarEl">
-                        <button class="btn btn-outline-success" type="submit" id="searchButton">Search</button>
+                        <input aria-label="Search" class="form-control me-2" id="searchBarEl" placeholder="Search"
+                               type="search">
+                        <button class="btn btn-outline-success" id="searchButton" type="submit">Search</button>
                     </span>
             <span>
-                <a target="_blank" href="../Login%20Portal/register/register.html">
+                <a href="../Login%20Portal/register/register.html" target="_blank">
                 <button class="btn btn-primary" type="button">Create
                 </button>
             </a>
             </span>
             <span>
                 <label>
-                    <select id="selectorEl" class="form-select" aria-label="Default select example">
+                    <select aria-label="Default select example" class="form-select" id="selectorEl">
                         <option value="0">sort by</option>
                         <option value="1">sort by ID</option>
                         <option value="2">sort by Coin</option>
@@ -77,38 +77,38 @@
             </v-list>
         </v-navigation-drawer>
         <v-content>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+                 tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Editing Information</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                         </div>
                         <div class="modal-body">
                             <form>
                                 <div class="mb-3">
-                                    <label for="recipient-firstName" class="col-form-label">Frist Name:</label>
-                                    <input type="text" class="form-control" id="recipient-firstName">
+                                    <label class="col-form-label" for="recipient-firstName">Frist Name:</label>
+                                    <input class="form-control" id="recipient-firstName" type="text">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="recipient-lastName" class="col-form-label">Last Name:</label>
-                                    <input type="text" class="form-control" id="recipient-lastName">
+                                    <label class="col-form-label" for="recipient-lastName">Last Name:</label>
+                                    <input class="form-control" id="recipient-lastName" type="text">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="recipient-email" class="col-form-label">Email:</label>
-                                    <input type="text" class="form-control" id="recipient-email">
+                                    <label class="col-form-label" for="recipient-email">Email:</label>
+                                    <input class="form-control" id="recipient-email" type="text">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="recipient-Coin" class="col-form-label">Coin:</label>
-                                    <input type="text" class="form-control" id="recipient-Coin">
+                                    <label class="col-form-label" for="recipient-Coin">Coin:</label>
+                                    <input class="form-control" id="recipient-Coin" type="text">
                                 </div>
 
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="confirm">Confirm
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                            <button class="btn btn-primary" data-bs-dismiss="modal" id="confirm" type="button">Confirm
                             </button>
                         </div>
                     </div>
@@ -125,16 +125,15 @@
     </v-app>
 </div>
 <!-- partial -->
+<script defer src="Bootstrap/vue.js" ></script>
 <script defer src='https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js'></script>
-<script defer src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
 <script defer src='https://cdn.jsdelivr.net/npm/vuetify@2.0.0/dist/vuetify.min.js'></script>
-<script defer src="script.js"></script>
+<script defer src="Bootstrap/script.js"></script>
 <script crossorigin="anonymous"
         defer integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script defer src="./public/Main.js" type="module"></script>
 <script defer src="public/SeachBar.js"></script>
-
 </body>
 </html>
+
