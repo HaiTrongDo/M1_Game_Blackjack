@@ -104,6 +104,7 @@ import {UserClass} from "./UserClass.js";
              return (
                     obj.name.toUpperCase().includes(filterCharters.toUpperCase()) ||
                     obj.lastName.toUpperCase().includes(filterCharters.toUpperCase())||
+                    obj.playerId.toString().includes(filterCharters)||
                     obj.email.toUpperCase().includes(filterCharters.toUpperCase())
              )
          })
